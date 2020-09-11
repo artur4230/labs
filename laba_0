@@ -1,0 +1,122 @@
+using System;
+
+namespace vscprojects
+{
+    class book
+    {
+        public string name, author;
+         public int year, pages;
+         public book(){
+             name = "No_Book";
+             author = "No_Author";
+             year = 0;
+             pages = 0;
+         }
+         public book(string name, string author){
+             this.name = name;
+             this.author = author;
+             year = 0;
+             pages = 0;
+         }
+         public book(string name, int year, int pages){
+             this.name = name;
+             author = "No_Author";
+             this.year = year;
+             this.pages = pages;
+         }
+         public book(string name, string author, int year, int pages){
+             this.name = name;
+             this.author = author;
+             this.year = year;
+             this.pages = pages;
+         }
+         public void inf(){
+             Console.WriteLine("Автор:{0}; Название:{1}; Год написания:{2}; Объём:{3}", author, name, year, pages);
+         }
+         public void inf(string order){
+             if(order == "Автор" || order == "автор"){
+                 if(author!="No_Author")
+                    Console.WriteLine("Автор-"+author);
+                else
+                    Console.WriteLine("No_author");
+             }
+             if(order == "Название" || order == "название"){
+                 if(name!="No_Book")
+                    Console.WriteLine("Название-"+name);
+                else
+                    Console.WriteLine("No_name");
+             }
+             if(order == "Год" || order == "год"){
+                 if(year!=0)
+                    Console.WriteLine("Год-"+year);
+                else
+                    Console.WriteLine("No_year");
+             }
+             if(order == "Объём" || order == "объём"){
+                 if(pages!=0)
+                    Console.WriteLine("Объём-"+pages);
+                else
+                    Console.WriteLine("No_pages");
+             }
+         }
+         public static int operator +(book book1, book book2){
+             return book1.pages+book2.pages;
+         }
+         public static int operator -(book book1, book book2){
+             return book1.pages-book2.pages;
+         }
+         public static bool operator >(book book1, book book2){
+             return book1.pages>book2.pages;
+         }
+         public static bool operator <(book book1, book book2){
+             return book1.pages<book2.pages;
+         }
+         public static bool operator ==(book book1, book book2){
+             return book1.pages==book2.pages;
+         }
+         public static bool operator !=(book book1, book book2){
+             return book1.pages!=book2.pages;
+         }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            book book1 = new book();
+            book book2 = new book("Война и мир", "Л.Н. Толстой");
+            book book3 = new book("Слово о полку Игориве", 1185, 150);
+            book book4 = new book("Отверженные", "В.Гюго", 1862, 1250);
+            /*Демострация перегрузки конструктора*/
+            Console.WriteLine(@"Книга первая
+             Название:{0}
+             Автор:{1}
+             Год:{2}
+             Объём:{3}", book1.name, book1.author, book1.year, book1.pages);
+            Console.WriteLine(@"Книга вторая
+             Название:{0}
+             Автор:{1}
+             Год:{2}
+             Объём:{3}", book2.name, book2.author, book2.year, book2.pages);
+            Console.WriteLine(@"Книга третья
+             Название:{0}
+             Автор:{1}
+             Год:{2}
+             Объём:{3}", book3.name, book3.author, book3.year, book3.pages);
+            Console.WriteLine(@"Книга четвёртая
+             Название:{0}
+             Автор:{1}
+             Год:{2}
+             Объём:{3}", book4.name, book4.author, book4.year, book4.pages);
+             /*Демонстрация перегрузки метода*/
+             book4.inf();
+             book4.inf("Автор");
+             /*Демонстрация перегрузки операторов*/
+             Console.WriteLine(book4+book1);
+             Console.WriteLine(book4-book3);
+             Console.WriteLine(book4 > book3);
+             Console.WriteLine(book4 < book3);
+             Console.WriteLine(book4 == book3);
+            Console.WriteLine(book4 != book3);
+        }
+    }
+}
